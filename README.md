@@ -250,3 +250,44 @@ Example response:
 }
 ```
 
+### 4) Cancel Order
+An `Order` can be cancelled as long as the passenger has not checked in into the show and cancellation time is appropriate depending on the product type.
+
+#### Endpoint
+```
+POST /orders/cancel
+```
+
+#### Input Parameters
+The following parameters are sent in the body payload of the HTTP POST request:
+
+| Parameter                 | Type    | Description                                                                           |
+|---------------------------|---------|---------------------------------------------------------------------------------------|
+| bookingCode               | string  | Booking code that needs to be cancelled                                               |
+
+#### Output Parameters
+| Parameter   | Type   | Description                                                                           |
+|-------------|--------|---------------------------------------------------------------------------------------|
+| bookingCode | string | Booking code of the reservation                                                       |
+| status      | string | New status of the order. Status should be "cancelled" if the request succeeded        |
+
+
+### Example
+
+```
+curl --location --request POST 'https://apidev.wellet.fun/orders/cancel' \
+--header 'x-api-key: YOUR_API_KEY' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "bookingCode": "GLKVUMU1JL" 
+}'
+```
+
+Example response:
+
+```
+{
+  "bookingCode": "GLKVUMU1JL",
+  "status": "cancelled"
+}
+```
